@@ -1,0 +1,99 @@
+Jusitn Grover
+jg943
+03/08/2013
+Connect 4 using Processes
+
+This assignment was ver fun to do and was also challenging enough to make
+you think. The hardest thing to get working was the pipe and fork.
+
+To accomplish this if have a loop that generates the pipes for the parent
+and child processes to communicate with eachother. 
+
+When I fork my processes I have the child process send a random move to the
+parent who will make sure the the move is valid and if the move is not valid
+it will request that the child sends another move, then repeates this
+process. I chose to do this becuase I was having trouble having the parent
+write to the child as well as read from it. Doing it the way I di has one
+one process read and one write. 
+
+After the parent preforms the child's move it checks for victory and if
+found prints the board and the correct winner. If no winner was found the
+parent ensures the board is not full then preforms its move. After the
+parent moves the board is check for winner and full again before it reads
+for the next child move.
+
+The AI for the parent plays to win by searching the entire board for a move
+that allows it to win instantly, if none is found then parent AI then looks
+for a blocking move to prevent the child from winning, if these cases fail
+the parent reverts to choosing a random move. 
+
+The child AI just chooses a random move all the time.
+
+In my code I check to ensure the input you give the program is valid and if
+not the program will exit.
+
+When the games are running I print a log of the moves each parent and child
+made, so you can follow what the AI is doing. 
+
+The following is a sample output of my program:
+
+Parent (1): 62682
+Child (1): 62683
+Child placed peice at: 7,5
+Parent placed peice at: 7,7
+Child placed peice at: 7,2
+Parent placed peice at: 6,5
+Child placed peice at: 7,0
+Parent placed peice at: 6,2
+Child placed peice at: 7,6
+Parent placed peice at: 5,5
+Child placed peice at: 6,0
+Parent placed peice at: 6,7
+Child placed peice at: 5,2
+Parent placed peice at: 5,7
+Child placed peice at: 4,2
+Parent placed peice at: 4,7
+Winner Parent
+Winning Parent (1): 62682
+ -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  - 
+ -  -  B  -  -  -  -  R 
+ -  -  B  -  -  R  -  R 
+ B  -  R  -  -  R  -  R 
+ B  -  B  -  -  B  B  R 
+Parent (2): 62682
+Child (2): 62684
+Child placed peice at: 7,0
+Parent placed peice at: 7,7
+Child placed peice at: 6,0
+Parent placed peice at: 7,5
+Child placed peice at: 7,2
+Parent placed peice at: 6,2
+Child placed peice at: 7,1
+Parent placed peice at: 6,5
+Child placed peice at: 6,1
+Parent placed peice at: 6,7
+Child placed peice at: 7,6
+Parent placed peice at: 5,7
+Child placed peice at: 5,0
+Parent placed peice at: 4,7
+Winner Parent
+Winning Parent (2): 62682
+ -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  R 
+ B  -  -  -  -  -  -  R 
+ B  B  R  -  -  R  -  R 
+ B  B  B  -  -  R  B  R
+
+Also provided is a make file with the following targets: 
+
+build: build the exe file
+clean: remove all files created
+test: run the test case
+run: run the program as required
+view: view source code in a pager
